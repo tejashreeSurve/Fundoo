@@ -9,6 +9,7 @@ public class UserDto {
 	private String city;
 	private String email;
 	private String userpassword;
+	private String confirmpassword;
 
 	public int getId() {
 		return id;
@@ -72,6 +73,14 @@ public class UserDto {
 
 	public void setUserpassword(String userpassword) {
 		this.userpassword = userpassword;
+	}
+
+	public String getConfirmpassword() {
+		return confirmpassword;
+	}
+
+	public void setConfirmpassword(String confirmpassword) {
+		this.confirmpassword = confirmpassword;
 	}
 
 }
