@@ -1,8 +1,11 @@
 package com.bridgelabz.userloginregistration.model;
-
+/**
+ * @author Tejashree Surve
+ * Purpose : This is Data Transfer Object that holds Data.
+ */
 public class UserDto {
 	private int id;
-	private String fristname;
+	private String firstname;
 	private String lastname;
 	private String birthdate;
 	private String phonenumber;
@@ -19,12 +22,12 @@ public class UserDto {
 		this.id = id;
 	}
 
-	public String getFristname() {
-		return fristname;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFristname(String fristname) {
-		this.fristname = fristname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getLastname() {
@@ -82,5 +85,4 @@ public class UserDto {
 	public void setConfirmpassword(String confirmpassword) {
 		this.confirmpassword = confirmpassword;
 	}
-
 }

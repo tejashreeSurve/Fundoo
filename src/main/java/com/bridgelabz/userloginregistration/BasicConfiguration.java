@@ -7,20 +7,17 @@ import org.springframework.context.annotation.Configuration;
 
 import com.bridgelabz.userloginregistration.services.JwtToken;
 
+/**
+ * @author Tejashree Surve
+ * Purpose : Contains Beans Definition so that spring IOC container can create object.
+ */
 @Configuration
 public class BasicConfiguration {
 
 	@Bean
 	ModelMapper getModelMapper() {
-	ModelMapper modelMapper = new ModelMapper();
-	modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-	return modelMapper;
-		
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		return modelMapper;
 	}
-	@Bean
-	JwtToken getJwtToken() {
-		JwtToken jwttoken = new JwtToken();
-		return jwttoken;
-	}
-
 }

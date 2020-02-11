@@ -6,7 +6,12 @@ import com.bridgelabz.userloginregistration.model.ResetPassword;
 import com.bridgelabz.userloginregistration.model.UserDto;
 import com.bridgelabz.userloginregistration.response.Response;
 
+/**
+ * @author Tejashree Surve
+ * Purpose : Interface of UserServices methods.
+ */
 public interface UserService {
+	
 	Response login(LoginUser loginUser);
 
 	Response registration(UserDto user);

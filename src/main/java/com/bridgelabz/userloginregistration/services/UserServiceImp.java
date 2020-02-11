@@ -12,6 +12,10 @@ import com.bridgelabz.userloginregistration.model.UserDto;
 import com.bridgelabz.userloginregistration.repository.UserRepository;
 import com.bridgelabz.userloginregistration.response.Response;
 
+/**
+ * @author Tejashree Surve 
+ * Purpose : This Class contains Logic for ever RestApi methods.
+ */
 @Service
 public class UserServiceImp implements UserService {
 	@Autowired
@@ -23,19 +27,20 @@ public class UserServiceImp implements UserService {
 	@Autowired
 	private JwtToken jwtobject;
 
-	// @Override
+	// Login operation
+	@Override
 	public Response login(LoginUser loginUser) {
 		UserDataBase user = userRepository.findByEmail(loginUser.getEmail());
-		if(user == null)
-			return new Response(400,"Email-id dosen't exist,Register First!!!");
+		if (user == null)
+			return new Response(400, "Email-id dosen't exist,Register First!!!");
 		if ((user.getUserpassword()).equals(loginUser.getUserpassword())) {
 			return new Response(200, "login-in successfully");
 		} else {
 			return new Response(400, "incorrect password");
 		}
-	
 	}
 
+	// Registration operation
 	@Override
 	public Response registration(UserDto user) {
 		UserDataBase userdata = mapper.map(user, UserDataBase.class);
@@ -43,6 +48,7 @@ public class UserServiceImp implements UserService {
 		return new Response(200, "register Successcully");
 	}
 
+	// Forget Password operation
 	@Override
 	public Response forgetPassword(EmailForgetPassword emailForgetPassword) {
 		String token = jwtobject.generateToken(emailForgetPassword.getEmail());
@@ -50,13 +56,13 @@ public class UserServiceImp implements UserService {
 		return new Response(200, "Authorization done ");
 	}
 
+	// Reset Password operation
 	@Override
 	public Response resetPassword(String token, ResetPassword passwordreset) {
-		System.out.println("*****"+token);
-		System.out.println("*****"+passwordreset);
 		String checkEmail = jwtobject.getToken(token);
+		System.out.println(checkEmail);
 		UserDataBase userUpdate = userRepository.findByEmail(checkEmail);
-		if(userUpdate == null)
+		if (userUpdate == null)
 			return new Response(400, "invalide token generation");
 		if (passwordreset.getConfirmpassword().equals(passwordreset.getPassword())) {
 			System.out.println("im in");
@@ -67,6 +73,5 @@ public class UserServiceImp implements UserService {
 		} else {
 			return new Response(400, "password is incorrect");
 		}
-		
 	}
 }

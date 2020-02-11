@@ -1,33 +1,38 @@
 package com.bridgelabz.userloginregistration.services;
 
 import java.util.Date;
-
+import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+/**
+ * @author Tejashree Surve
+ * Purpose : This class used for token operation.
+ */
+@Component
 public class JwtToken {
-	SignatureAlgorithm alorithm=SignatureAlgorithm.HS256;
-	static String secretKey="iamsecretkey";
 	
-
-public  String generateToken(String email) {
-	JwtBuilder builderJwts=Jwts.builder().setId(email).setIssuedAt(new Date(System.currentTimeMillis())).signWith(alorithm,secretKey );
+	// Algorithm
+	SignatureAlgorithm alorithm = SignatureAlgorithm.HS256;
 	
-	return builderJwts.compact();
-}
+	// secret Key used by Algorithm
+	static String secretKey = "iamsecretkey";
 
-public String getToken(String token)
-{
-Claims claim=null;
-try {
-	 claim=Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-	 System.out.println("encodedtoken:--"+ claim.getSubject());
-    }catch(Exception e)
-   {
-		System.out.println("invalide token");
+	// To generate Token
+	public String generateToken(String email) {
+		return Jwts.builder().setId(email).setIssuedAt(new Date(System.currentTimeMillis()))
+				.signWith(alorithm, secretKey).compact();
 	}
-			return claim.getSubject();
-}
+
+	// To decode Token
+	public String getToken(String token) {
+		Claims claim = null;
+		try {
+			claim = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return claim.getId();
+	}
 }

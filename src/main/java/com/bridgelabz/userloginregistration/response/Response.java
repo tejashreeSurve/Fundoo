@@ -1,5 +1,9 @@
 package com.bridgelabz.userloginregistration.response;
 
+/**
+ * @author Tejashree Surve
+ * Purpose : This Class provide the data to send in http response.
+ */
 public class Response {
 	private int statuscode;
 	private String message;
@@ -24,5 +28,4 @@ public class Response {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 }
