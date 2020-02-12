@@ -1,9 +1,9 @@
 package com.bridgelabz.userloginregistration.services;
 
-import com.bridgelabz.userloginregistration.model.EmailForgetPassword;
-import com.bridgelabz.userloginregistration.model.LoginUser;
-import com.bridgelabz.userloginregistration.model.ResetPassword;
-import com.bridgelabz.userloginregistration.model.UserDto;
+import com.bridgelabz.userloginregistration.dto.EmailForgetPasswordDto;
+import com.bridgelabz.userloginregistration.dto.LoginUserDto;
+import com.bridgelabz.userloginregistration.dto.ResetPasswordDto;
+import com.bridgelabz.userloginregistration.dto.UserDto;
 import com.bridgelabz.userloginregistration.response.Response;
 
 /**
@@ -12,11 +12,11 @@ import com.bridgelabz.userloginregistration.response.Response;
  */
 public interface UserService {
 	
-	Response login(LoginUser loginUser);
+	Response login(LoginUserDto loginUser);
 
 	Response registration(UserDto user);
 
-	Response forgetPassword(EmailForgetPassword email);
+	Response forgetPassword(EmailForgetPasswordDto email);
 
-	Response resetPassword(String token, ResetPassword passwordrest);
+	Response resetPassword(String token, ResetPasswordDto passwordrest);
 }

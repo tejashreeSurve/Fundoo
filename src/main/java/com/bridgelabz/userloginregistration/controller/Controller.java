@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bridgelabz.userloginregistration.model.EmailForgetPassword;
-import com.bridgelabz.userloginregistration.model.LoginUser;
-import com.bridgelabz.userloginregistration.model.ResetPassword;
-import com.bridgelabz.userloginregistration.model.UserDto;
+import com.bridgelabz.userloginregistration.dto.EmailForgetPasswordDto;
+import com.bridgelabz.userloginregistration.dto.LoginUserDto;
+import com.bridgelabz.userloginregistration.dto.ResetPasswordDto;
+import com.bridgelabz.userloginregistration.dto.UserDto;
 import com.bridgelabz.userloginregistration.response.Response;
 import com.bridgelabz.userloginregistration.services.UserService;
 
@@ -36,21 +35,21 @@ public class Controller {
 
 	// Login RestApi method
 	@RequestMapping(method = RequestMethod.POST, value = "/userRegistration/login")
-	public ResponseEntity<Response> login(@RequestBody LoginUser loginUser) {
+	public ResponseEntity<Response> login(@RequestBody LoginUserDto loginUser) {
 		Response response = userService.login(loginUser);
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
 	// Forget password RestApi method
 	@RequestMapping(method = RequestMethod.POST, value = "/userRegistration/forgetPassword")
-	public ResponseEntity<Response> forgetPassword(@RequestBody EmailForgetPassword emailforgetpassword) {
+	public ResponseEntity<Response> forgetPassword(@RequestBody EmailForgetPasswordDto emailforgetpassword) {
 		Response response = userService.forgetPassword(emailforgetpassword);
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
 	// Reset Password RestApi method
 	@RequestMapping(method = RequestMethod.PUT, value = "/userRegistration/resetPassword")
-	public ResponseEntity<Response> resetPassword(@RequestHeader String token, @RequestBody ResetPassword password) {
+	public ResponseEntity<Response> resetPassword(@RequestHeader String token, @RequestBody ResetPasswordDto password) {
 		Response response = userService.resetPassword(token, password);
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}

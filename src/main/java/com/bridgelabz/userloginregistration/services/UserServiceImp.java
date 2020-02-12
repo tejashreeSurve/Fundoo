@@ -1,14 +1,14 @@
-package com.bridgelabz.userloginregistration.services;
+   package com.bridgelabz.userloginregistration.services;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bridgelabz.userloginregistration.model.EmailForgetPassword;
-import com.bridgelabz.userloginregistration.model.LoginUser;
-import com.bridgelabz.userloginregistration.model.ResetPassword;
+import com.bridgelabz.userloginregistration.dto.EmailForgetPasswordDto;
+import com.bridgelabz.userloginregistration.dto.LoginUserDto;
+import com.bridgelabz.userloginregistration.dto.ResetPasswordDto;
+import com.bridgelabz.userloginregistration.dto.UserDto;
 import com.bridgelabz.userloginregistration.model.UserDataBase;
-import com.bridgelabz.userloginregistration.model.UserDto;
 import com.bridgelabz.userloginregistration.repository.UserRepository;
 import com.bridgelabz.userloginregistration.response.Response;
 
@@ -29,7 +29,7 @@ public class UserServiceImp implements UserService {
 
 	// Login operation
 	@Override
-	public Response login(LoginUser loginUser) {
+	public Response login(LoginUserDto loginUser) {
 		UserDataBase user = userRepository.findByEmail(loginUser.getEmail());
 		if (user == null)
 			return new Response(400, "Email-id dosen't exist,Register First!!!");
@@ -50,15 +50,15 @@ public class UserServiceImp implements UserService {
 
 	// Forget Password operation
 	@Override
-	public Response forgetPassword(EmailForgetPassword emailForgetPassword) {
+	public Response forgetPassword(EmailForgetPasswordDto emailForgetPassword) {
 		String token = jwtobject.generateToken(emailForgetPassword.getEmail());
 		System.out.println(token);
-		return new Response(200, "Authorization done ");
+		return new Response(200, "Operation complet");
 	}
 
 	// Reset Password operation
 	@Override
-	public Response resetPassword(String token, ResetPassword passwordreset) {
+	public Response resetPassword(String token, ResetPasswordDto passwordreset) {
 		String checkEmail = jwtobject.getToken(token);
 		System.out.println(checkEmail);
 		UserDataBase userUpdate = userRepository.findByEmail(checkEmail);
@@ -67,7 +67,6 @@ public class UserServiceImp implements UserService {
 		if (passwordreset.getConfirmpassword().equals(passwordreset.getPassword())) {
 			System.out.println("im in");
 			userUpdate.setUserpassword(passwordreset.getPassword());
-			userUpdate.setConfirmpassword(passwordreset.getConfirmpassword());
 			userRepository.save(userUpdate);
 			return new Response(200, "password is update");
 		} else {

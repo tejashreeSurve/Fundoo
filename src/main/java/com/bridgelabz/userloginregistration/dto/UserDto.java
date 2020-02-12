@@ -1,27 +1,30 @@
-package com.bridgelabz.userloginregistration.model;
+package com.bridgelabz.userloginregistration.dto;
+
+import javax.validation.constraints.Pattern;
+
+import org.springframework.lang.NonNull;
+
 /**
  * @author Tejashree Surve
  * Purpose : This is Data Transfer Object that holds Data.
  */
 public class UserDto {
-	private int id;
+	@NonNull
 	private String firstname;
+	@NonNull
 	private String lastname;
+	@Pattern(regexp = "((([0]{1}[1-9]{1})|([1]{1}[0-9]{1})|([2]{1}[0-9]{1})|([3]{1}[0-1]{1}))/(([0]{1}[1-9]{1})|([1]{1}[0-2]{1}))/([1-9]{1}[0-9]{1}[0-9]{1}[1-9]{1}))",message = "Please Enter valide date")
 	private String birthdate;
+	@Pattern(regexp = "^\\d{10}",message ="Please Enter valide Phone-Number")
 	private String phonenumber;
+	@NonNull
 	private String city;
+	@Pattern(regexp = "\"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@\"\n" + 
+			"+ \"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$\"",message = "Please Enter valide Email")
 	private String email;
+	@Pattern(regexp = "(?=.*[0-9])" ,message = "Password must contain at least one numeric value")
 	private String userpassword;
-	private String confirmpassword;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	public String getFirstname() {
 		return firstname;
 	}
@@ -76,13 +79,5 @@ public class UserDto {
 
 	public void setUserpassword(String userpassword) {
 		this.userpassword = userpassword;
-	}
-
-	public String getConfirmpassword() {
-		return confirmpassword;
-	}
-
-	public void setConfirmpassword(String confirmpassword) {
-		this.confirmpassword = confirmpassword;
 	}
 }

@@ -1,10 +1,13 @@
-package com.bridgelabz.userloginregistration.model;
+package com.bridgelabz.userloginregistration.dto;
+
+import javax.validation.constraints.Pattern;
 
 /**
  * @author Tejashree Surve
  * Purpose : This is Data Transfer Object that holds Data.
  */
-public class ResetPassword {
+public class ResetPasswordDto {
+	@Pattern(regexp = "(?=.*[0-9])" ,message = "Password must contain at least one numeric value")
 	private String password;
 	private String confirmpassword;
 
