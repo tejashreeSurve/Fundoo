@@ -3,6 +3,8 @@ package com.bridgelabz.userloginregistration.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +53,13 @@ public class Controller {
 	@RequestMapping(method = RequestMethod.PUT, value = "/userRegistration/resetPassword")
 	public ResponseEntity<Response> resetPassword(@RequestHeader String token, @RequestBody ResetPasswordDto password) {
 		Response response = userService.resetPassword(token, password);
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
+	}
+	
+	// User Validation RestApi method
+	@PostMapping(value = "/userRegistration/validation")
+	public ResponseEntity<Response> validation(@RequestHeader String token){
+		Response response = userService.validateUser(token);
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 }

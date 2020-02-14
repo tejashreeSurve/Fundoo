@@ -17,8 +17,7 @@ import org.springframework.stereotype.Component;
 @Table(name = "loginregistrationdetail")
 public class UserDataBase {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String firstname;
 	private String lastname;
@@ -27,6 +26,7 @@ public class UserDataBase {
 	private String city;
 	private String email;
 	private String userpassword;
+	private boolean isValidate;
 
 	public int getId() {
 		return id;
@@ -90,5 +90,12 @@ public class UserDataBase {
 
 	public void setUserpassword(String userpassword) {
 		this.userpassword = userpassword;
+	}
+	
+	public boolean getIsValidate() {
+		return isValidate;
+	}
+	public void setIsValidate(boolean isValidate) {
+		this.isValidate = isValidate;
 	}
 }

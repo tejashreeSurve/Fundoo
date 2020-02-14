@@ -19,4 +19,6 @@ public interface UserService {
 	Response forgetPassword(EmailForgetPasswordDto email);
 
 	Response resetPassword(String token, ResetPasswordDto passwordrest);
+	
+	Response validateUser(String token);
 }

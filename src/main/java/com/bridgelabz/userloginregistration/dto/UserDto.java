@@ -24,6 +24,7 @@ public class UserDto {
 	private String email;
 	@Pattern(regexp = "(?=.*[0-9])" ,message = "Password must contain at least one numeric value")
 	private String userpassword;
+	private boolean isValidate;
 	
 	public String getFirstname() {
 		return firstname;
@@ -80,4 +81,13 @@ public class UserDto {
 	public void setUserpassword(String userpassword) {
 		this.userpassword = userpassword;
 	}
+
+	public boolean isValidate() {
+		return isValidate;
+	}
+
+	public void setValidate(boolean isValidate) {
+		this.isValidate = isValidate;
+	}
+	
 }
