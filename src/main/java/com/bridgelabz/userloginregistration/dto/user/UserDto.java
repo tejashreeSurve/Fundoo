@@ -1,41 +1,31 @@
-package com.bridgelabz.userloginregistration.model;
+package com.bridgelabz.userloginregistration.dto.user;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
-import org.springframework.stereotype.Component;
+import org.springframework.lang.NonNull;
 
 /**
- * @author Tejashree Surve 
- * Purpose : This is Data Access Object class which is connect to DataBase Layer.
+ * @author Tejashree Surve
+ * Purpose : This is Data Transfer Object that holds Data.
  */
-@Component
-@Entity
-@Table(name = "loginregistrationdetail")
-public class UserDataBase {
-
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+public class UserDto {
+	@NonNull
 	private String firstname;
+	@NonNull
 	private String lastname;
+	@Pattern(regexp = "((([0]{1}[1-9]{1})|([1]{1}[0-9]{1})|([2]{1}[0-9]{1})|([3]{1}[0-1]{1}))/(([0]{1}[1-9]{1})|([1]{1}[0-2]{1}))/([1-9]{1}[0-9]{1}[0-9]{1}[1-9]{1}))",message = "Please Enter valide date")
 	private String birthdate;
+	@Pattern(regexp = "^\\d{10}",message ="Please Enter valide Phone-Number")
 	private String phonenumber;
+	@NonNull
 	private String city;
+	@Pattern(regexp = "\"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@\"\n" + 
+			"+ \"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$\"",message = "Please Enter valide Email")
 	private String email;
+	@Pattern(regexp = "(?=.*[0-9])" ,message = "Password must contain at least one numeric value")
 	private String userpassword;
 	private boolean isValidate;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	public String getFirstname() {
 		return firstname;
 	}
@@ -91,11 +81,13 @@ public class UserDataBase {
 	public void setUserpassword(String userpassword) {
 		this.userpassword = userpassword;
 	}
-	
-	public boolean getIsValidate() {
+
+	public boolean isValidate() {
 		return isValidate;
 	}
-	public void setIsValidate(boolean isValidate) {
+
+	public void setValidate(boolean isValidate) {
 		this.isValidate = isValidate;
 	}
+	
 }

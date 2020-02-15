@@ -1,8 +1,8 @@
-package com.bridgelabz.userloginregistration.repository;
+package com.bridgelabz.userloginregistration.repository.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.bridgelabz.userloginregistration.model.UserDataBase;
+import com.bridgelabz.userloginregistration.model.user.UserDataBase;
 
 /**
  * @author Tejashree Surve

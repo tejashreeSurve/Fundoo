@@ -1,4 +1,4 @@
-package com.bridgelabz.userloginregistration.Exception;
+package com.bridgelabz.userloginregistration.Exception.custom;
 
 public class RegistrationException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package com.bridgelabz.userloginregistration.services;
+package com.bridgelabz.userloginregistration.services.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

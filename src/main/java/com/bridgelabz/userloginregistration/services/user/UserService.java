@@ -1,9 +1,9 @@
-package com.bridgelabz.userloginregistration.services;
+package com.bridgelabz.userloginregistration.services.user;
 
-import com.bridgelabz.userloginregistration.dto.EmailForgetPasswordDto;
-import com.bridgelabz.userloginregistration.dto.LoginUserDto;
-import com.bridgelabz.userloginregistration.dto.ResetPasswordDto;
-import com.bridgelabz.userloginregistration.dto.UserDto;
+import com.bridgelabz.userloginregistration.dto.user.EmailForgetPasswordDto;
+import com.bridgelabz.userloginregistration.dto.user.LoginUserDto;
+import com.bridgelabz.userloginregistration.dto.user.ResetPasswordDto;
+import com.bridgelabz.userloginregistration.dto.user.UserDto;
 import com.bridgelabz.userloginregistration.response.Response;
 
 /**

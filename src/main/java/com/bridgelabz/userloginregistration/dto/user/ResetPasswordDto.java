@@ -1,4 +1,4 @@
-package com.bridgelabz.userloginregistration.dto;
+package com.bridgelabz.userloginregistration.dto.user;
 
 import javax.validation.constraints.Pattern;
 
