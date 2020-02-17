@@ -59,15 +59,15 @@ public class UserServiceImp implements UserService {
 			throw new LoginException(message.User_Not_Exist);
 		if (user.getIsValidate()) {
 			if ((user.getUserpassword()).equals(loginUser.getUserpassword())) {
-				return new Response(Integer.parseInt(environment.getProperty("status.success.code")), token,
-						environment.getProperty("status.login.success"));
+				return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
+						environment.getProperty("status.login.success"), token);
 			} else {
 				return new Response(Integer.parseInt(environment.getProperty("status.redirect.code")),
-						environment.getProperty("status.password.incorrect"));
+						environment.getProperty("status.password.incorrect"),message.Invalide_Password);
 			}
 		} else {
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
-					environment.getProperty("status.email.notverify"));
+					environment.getProperty("status.email.notverify"),message.User_Not_Verify);
 		}
 	}
 
@@ -81,9 +81,7 @@ public class UserServiceImp implements UserService {
 		} else {
 			userIsVarified.setIsValidate(true);
 			userRepository.save(userIsVarified);
-//			return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
-//					environment.getProperty("status.email.isverify"));
-			return new Response(Integer.parseInt(environment.getProperty("status.success.code")), environment.getProperty("status.email.isverify"));
+		return new Response(Integer.parseInt(environment.getProperty("status.success.code")),environment.getProperty("status.email.isverify"),message.Verify_User);
 		}
 	}
 
@@ -93,8 +91,8 @@ public class UserServiceImp implements UserService {
 		String emailIsPresent = user.getEmail();
 		UserDataBase userIsPresent = userRepository.findByEmail(emailIsPresent);
 		if (userIsPresent != null) {
-			return new Response(Integer.parseInt(environment.getProperty("status.email.isexist")),
-					"email already Exist");
+			return new Response(Integer.parseInt(environment.getProperty("status.token.send")),
+				environment.getProperty("status.email.isexist"),message.User_Exist);
 		}
 		UserDataBase userdata = mapper.map(user, UserDataBase.class);
 		userRepository.save(userdata);
@@ -104,7 +102,7 @@ public class UserServiceImp implements UserService {
 		emailSenderService.sendEmail(email);
 
 		return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
-				environment.getProperty("status.user.register"));
+				environment.getProperty("status.user.register"),message.Registration_Done);
 	}
 
 	// Forget Password operation
@@ -120,10 +118,10 @@ public class UserServiceImp implements UserService {
 			email = messageResponse.passwordReset(emailForgetPassword.getEmail(), userdata.getFirstname(), token);
 			emailSenderService.sendEmail(email);
 			return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
-					environment.getProperty("status.token.send"));
+					environment.getProperty("status.token.send"),message.Token_Send);
 		} else {
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
-					environment.getProperty("status.email.notverify"));
+					environment.getProperty("status.email.notverify"),message.User_Not_Verify);
 		}
 	}
 
@@ -139,10 +137,10 @@ public class UserServiceImp implements UserService {
 			userUpdate.setUserpassword(passwordreset.getPassword());
 			userRepository.save(userUpdate);
 			return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
-					environment.getProperty("status.password.update"));
+					environment.getProperty("status.password.update"),message.Update_Password);
 		} else {
 			return new Response(Integer.parseInt(environment.getProperty("status.redirect.code")),
-					environment.getProperty("status.password.incorrect"));
+					environment.getProperty("status.password.incorrect"),message.Invalide_Password);
 		}
 	}
 }

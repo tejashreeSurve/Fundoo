@@ -38,9 +38,9 @@ public class NoteController {
 	}
 
 	// Update Note
-	@PutMapping("/notes/updatenote")
-	public ResponseEntity<Response> updateNote(@RequestHeader String token, @RequestBody NoteDto notedto) {
-		Response response = noteservice.updateNote(token, notedto);
+	@PutMapping("/notes/updatenote/{id}")
+	public ResponseEntity<Response> updateNote(@RequestHeader String token,@PathVariable int id, @RequestBody NoteDto notedto) {
+		Response response = noteservice.updateNote(token, id,notedto);
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 

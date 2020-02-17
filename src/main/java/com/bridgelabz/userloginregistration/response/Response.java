@@ -13,30 +13,16 @@ import com.bridgelabz.userloginregistration.model.user.UserDataBase;
 public class Response {
 	private int statuscode;
 	private String message;
-	private String token;
-	private List<UserDataBase> list;
+	private Object data;
 
 	public Response() {
 		// TODO Auto-generated constructor stub
 	}
 	@Autowired
-	public Response(int statuscode, String message) {
+	public Response(int statuscode, String message, Object data) {
 		this.statuscode = statuscode;
 		this.message = message;
-	}
-
-	@Autowired
-	public Response(int statuscode, String token, String message) {
-		this.statuscode = statuscode;
-		this.token=token;
-		this.message=message;
-	}
-	@Autowired
-	public Response(int statuscode, String token, String message, List<UserDataBase> note) {
-		this.statuscode = statuscode;
-		this.token = token;
-		this.message = message;
-		this.list=note;
+		this.data = data;
 	}
 
 	public int getStatuscode() {
@@ -54,20 +40,10 @@ public class Response {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-	public String getToken() {
-		return token;
+	public Object getData() {
+		return data;
 	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public List<UserDataBase> getList() {
-		return list;
-	}
-
-	public void setList(List<UserDataBase> list) {
-		this.list = list;
+	public void setData(Object data) {
+		this.data = data;
 	}
 }

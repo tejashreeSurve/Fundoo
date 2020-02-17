@@ -1,23 +1,29 @@
 package com.bridgelabz.userloginregistration.model.user;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.bridgelabz.userloginregistration.model.note.NoteDataBase;
+
 /**
- * @author Tejashree Surve 
- * Purpose : This is Data Access Object class which is connect to DataBase Layer.
+ * @author Tejashree Surve Purpose : This is Data Access Object class which is
+ *         connect to DataBase Layer.
  */
 @Component
 @Entity
 @Table(name = "loginregistrationdetail")
 public class UserDataBase {
 
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String firstname;
 	private String lastname;
@@ -27,6 +33,9 @@ public class UserDataBase {
 	private String email;
 	private String userpassword;
 	private boolean isValidate;
+	
+	@OneToMany(mappedBy = "userDataBase")
+	private List<NoteDataBase> noteDataBase;
 
 	public int getId() {
 		return id;
@@ -91,11 +100,25 @@ public class UserDataBase {
 	public void setUserpassword(String userpassword) {
 		this.userpassword = userpassword;
 	}
-	
+
 	public boolean getIsValidate() {
 		return isValidate;
 	}
+
 	public void setIsValidate(boolean isValidate) {
+		this.isValidate = isValidate;
+	}
+
+	
+	public List<NoteDataBase> getNoteDataBase() {
+		return noteDataBase;
+	}
+
+	public void setNoteDataBase(List<NoteDataBase> noteDataBase) {
+		this.noteDataBase = noteDataBase;
+	}
+
+	public void setValidate(boolean isValidate) {
 		this.isValidate = isValidate;
 	}
 }

@@ -1,7 +1,11 @@
 package com.bridgelabz.userloginregistration.dto.note;
 
+import org.springframework.lang.NonNull;
+
 public class NoteDto {
+	@NonNull
 	private String title;
+	@NonNull
 	private String description;
 
 	public String getTitle() {
