@@ -17,10 +17,13 @@ import org.springframework.stereotype.Component;
 
 import com.bridgelabz.userloginregistration.model.label.LabelDataBase;
 import com.bridgelabz.userloginregistration.model.user.UserDataBase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Component
 @Table(name = "notedatabase")
+@JsonIgnoreProperties({"userDataBase","labelList"})
 public class NoteDataBase {
 
 	@Id

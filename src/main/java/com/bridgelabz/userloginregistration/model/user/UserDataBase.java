@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import com.bridgelabz.userloginregistration.model.note.NoteDataBase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author Tejashree Surve Purpose : This is Data Access Object class which is
@@ -24,7 +26,7 @@ public class UserDataBase {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int id;	
 	private String firstname;
 	private String lastname;
 	private String birthdate;
@@ -33,6 +35,7 @@ public class UserDataBase {
 	private String email;
 	private String userpassword;
 	private boolean isValidate;
+	
 	
 	@OneToMany(mappedBy = "userDataBase")
 	private List<NoteDataBase> noteDataBase;

@@ -24,7 +24,7 @@ public class MessageInfo {
 
 	public String Verify_User = "User can Login Successfully";
 
-	public String Note_Not_Exist = "Please try with another note";
+	public String Note_Not_Exist = "Note does not Exist";
 	
 	public String Note_UnPin = "You can Pin it again";
 	
@@ -38,5 +38,9 @@ public class MessageInfo {
 	
 	public String Note_Trash = "You can UnTrash it again";
 	
-
+	public String Note_Label_Not_Exist = "No Note with this Label";
+	
+	public String Label_Not_Exist = "No Label present with this Id";
+	
+	public String Label_Change = "Label Name is been changed";
 }

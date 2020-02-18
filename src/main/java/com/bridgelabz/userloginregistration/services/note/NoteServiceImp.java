@@ -1,5 +1,6 @@
 package com.bridgelabz.userloginregistration.services.note;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.userloginregistration.dto.note.NoteDto;
-import com.bridgelabz.userloginregistration.dto.note.NoteTitleDto;
 import com.bridgelabz.userloginregistration.model.note.NoteDataBase;
 import com.bridgelabz.userloginregistration.model.user.UserDataBase;
 import com.bridgelabz.userloginregistration.repository.note.NoteRepository;
@@ -41,6 +41,9 @@ public class NoteServiceImp implements NoteService {
 
 	@Autowired
 	MessageInfo message;
+	
+	@Autowired
+	UserDataBase userdatabase;
 
 	// Create New Note
 	@Override
@@ -62,21 +65,20 @@ public class NoteServiceImp implements NoteService {
 	public Response getAllNotes(String token) {
 		String email = jwtOperation.getToken(token);
 		UserDataBase user = userRepository.findByEmail(email);
+		List<NoteDataBase> allNotedata = noteRepository.findAll();
 		if (user == null)
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("status.email.notexist"), message.User_Not_Exist);
-		List<NoteDataBase> allnoteList = noteRepository.findAll();
-		List<NoteDataBase> noteList = null;
-//	Stream<NoteDataBase> list= allnoteList.stream().filter(userdata -> userdata.getUserDataBase().equals(user));
-//		for (NoteDataBase noteDataBase : allnoteList) {
-//			noteList.add(noteDataBase);
-//		}
-		for(NoteDataBase note : allnoteList) {
-		if(note.getUserDataBase().equals(user))
-			noteList.add(note);
+		if(allNotedata == null)
+			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
+					environment.getProperty("note.notexist"), message.Note_Not_Exist);
+		List<NoteDataBase> notedata= new ArrayList<NoteDataBase>();
+		for(int i=0;i<allNotedata.size();i++) {
+			if(allNotedata.get(i).getUserDataBase().getId() == user.getId())
+				notedata.add(allNotedata.get(i));
 		}
 		return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
-				environment.getProperty("note.getallnotes"), noteList);
+				environment.getProperty("note.getallnotes"), notedata);
 	}
 
 	// Update Note
@@ -88,7 +90,6 @@ public class NoteServiceImp implements NoteService {
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("status.email.notexist"), message.User_Not_Exist);
 		NoteDataBase noteData = noteRepository.findById(id);
-		System.out.println(noteData.getTitle());
 		if(noteData == null)
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("note.notexist"), message.Note_Not_Exist);

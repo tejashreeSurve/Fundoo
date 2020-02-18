@@ -24,7 +24,7 @@ public class LabelDataBase {
 	private int id;
 	private String labelname;
 	@ManyToMany
-	//@JoinTable(name ="notelabel",joinColumns = @JoinColumn(referencedColumnName = "id"))
+	@JoinTable(name ="notelabel",joinColumns = @JoinColumn(referencedColumnName = "id"))
 	private List<NoteDataBase> noteList = new  ArrayList<NoteDataBase>();
 	
 
