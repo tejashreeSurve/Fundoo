@@ -2,6 +2,8 @@ package com.bridgelabz.userloginregistration.services.note;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +13,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.userloginregistration.dto.note.NoteDto;
+import com.bridgelabz.userloginregistration.message.MessageInfo;
 import com.bridgelabz.userloginregistration.model.note.NoteDataBase;
 import com.bridgelabz.userloginregistration.model.user.UserDataBase;
 import com.bridgelabz.userloginregistration.repository.note.NoteRepository;
 import com.bridgelabz.userloginregistration.repository.user.UserRepository;
 import com.bridgelabz.userloginregistration.response.Response;
-import com.bridgelabz.userloginregistration.services.user.JwtToken;
-import com.bridgelabz.userloginregistration.services.user.MessageInfo;
+import com.bridgelabz.userloginregistration.utility.JwtToken;
 
+/**
+ * @author Tejashree Surve 
+ * Purpose : This is Service class of Note which contain logic for all Api's.
+ */
 @Component
 @Service
 @PropertySource("message.properties")
@@ -41,13 +47,13 @@ public class NoteServiceImp implements NoteService {
 
 	@Autowired
 	MessageInfo message;
-	
+
 	@Autowired
 	UserDataBase userdatabase;
 
 	// Create New Note
 	@Override
-	public Response createNote(String token, NoteDto notedto) {
+	public Response createNote(String token,NoteDto notedto) {
 		String email = jwtOperation.getToken(token);
 		UserDataBase user = userRepository.findByEmail(email);
 		if (user == null)
@@ -69,36 +75,34 @@ public class NoteServiceImp implements NoteService {
 		if (user == null)
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("status.email.notexist"), message.User_Not_Exist);
-		if(allNotedata == null)
+		if (allNotedata == null)
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("note.notexist"), message.Note_Not_Exist);
-		List<NoteDataBase> notedata= new ArrayList<NoteDataBase>();
-		for(int i=0;i<allNotedata.size();i++) {
-			if(allNotedata.get(i).getUserDataBase().getId() == user.getId())
-				notedata.add(allNotedata.get(i));
-		}
+		// this stream filter those notes which contains user id is equal to given token
+		List<NoteDataBase> listOfNotes = allNotedata.stream()
+				.filter(userdata -> userdata.getUserDataBase().getId() == user.getId()).collect(Collectors.toList());
 		return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
-				environment.getProperty("note.getallnotes"), notedata);
+				environment.getProperty("note.getallnotes"), listOfNotes);
 	}
 
 	// Update Note
 	@Override
-	public Response updateNote(String token,int id, NoteDto notedto) {
+	public Response updateNote(String token, int id, NoteDto notedto) {
 		String email = jwtOperation.getToken(token);
 		UserDataBase user = userRepository.findByEmail(email);
 		if (user == null)
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("status.email.notexist"), message.User_Not_Exist);
 		NoteDataBase noteData = noteRepository.findById(id);
-		if(noteData == null)
+		if (noteData == null)
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("note.notexist"), message.Note_Not_Exist);
 		else {
-		noteData.setDescription(notedto.getDescription());
-		noteData.setTitle(notedto.getTitle());
-		noteRepository.save(noteData);
-		return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
-				environment.getProperty("note.update"), token);
+			noteData.setDescription(notedto.getDescription());
+			noteData.setTitle(notedto.getTitle());
+			noteRepository.save(noteData);
+			return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
+					environment.getProperty("note.update"), token);
 		}
 	}
 
@@ -110,13 +114,13 @@ public class NoteServiceImp implements NoteService {
 		if (user == null)
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("status.email.notexist"), message.User_Not_Exist);
-		if(noteRepository.findById(id) == null)
+		if (noteRepository.findById(id) == null)
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("note.notexist"), message.Note_Not_Exist);
 		else {
-		noteRepository.deleteById(id);
-		return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
-				environment.getProperty("note.delete"), token);
+			noteRepository.deleteById(id);
+			return new Response(Integer.parseInt(environment.getProperty("status.success.code")),
+					environment.getProperty("note.delete"), token);
 		}
 	}
 
@@ -132,7 +136,7 @@ public class NoteServiceImp implements NoteService {
 		if (notedata == null)
 			return new Response(Integer.parseInt(environment.getProperty("status.bad.code")),
 					environment.getProperty("note.notexist"), message.Note_Not_Exist);
-		
+
 		if (notedata.isPinOrUnPin() == false) {
 			notedata.setPinOrUnPin(true);
 			noteRepository.save(notedata);
@@ -197,4 +201,6 @@ public class NoteServiceImp implements NoteService {
 					environment.getProperty("note.isuntrash"), message.Note_UnTrash);
 		}
 	}
+	
+	
 }

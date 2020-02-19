@@ -18,6 +18,10 @@ import com.bridgelabz.userloginregistration.dto.note.NoteDto;
 import com.bridgelabz.userloginregistration.response.Response;
 import com.bridgelabz.userloginregistration.services.label.LabelServiceImp;
 
+/**
+ * @author Tejashree Surve
+ * Purpose : This is RestApi Controller for Label Operation.
+ */
 @RestController
 public class LabelController {
 	@Autowired
@@ -65,9 +69,9 @@ public class LabelController {
 			return new ResponseEntity<Response>(response, HttpStatus.OK);
 		}
 		
-		// Change Label
+		// Change Label By passing Id
 		@PutMapping("/label/changelabel")
-		public ResponseEntity<Response> changeLabel(ChangeLabelDto changelabel) {
+		public ResponseEntity<Response> changeLabel(@RequestBody ChangeLabelDto changelabel) {
 			Response response = labelservice.changeLabel(changelabel);
 			return new ResponseEntity<Response>(response, HttpStatus.OK);
 		}

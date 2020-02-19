@@ -21,7 +21,7 @@ import com.bridgelabz.userloginregistration.services.user.UserService;
 
 /**
  * @author Tejashree Surve
- * Purpose : This is RESTAPI Controller which contains multiple Api.
+ * Purpose :  This is RestApi Controller for User Operation.
  */
 @RestController
 public class UserController {

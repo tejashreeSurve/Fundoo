@@ -1,9 +1,10 @@
-package com.bridgelabz.userloginregistration.services.user;
+package com.bridgelabz.userloginregistration.message;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class MessageInfo {
+	// messages for user
 	public String Invalide_Token = "Invalide Token";
 
 	public String User_Exist = "Please try with other Email-id";
@@ -24,6 +25,7 @@ public class MessageInfo {
 
 	public String Verify_User = "User can Login Successfully";
 
+	// messages for notes
 	public String Note_Not_Exist = "Note does not Exist";
 	
 	public String Note_UnPin = "You can Pin it again";
@@ -40,7 +42,12 @@ public class MessageInfo {
 	
 	public String Note_Label_Not_Exist = "No Note with this Label";
 	
+	// messages for label
 	public String Label_Not_Exist = "No Label present with this Id";
 	
 	public String Label_Change = "Label Name is been changed";
+	
+	public String Reminder_isPresent = "Cannot Add Reminder";
+	
+	public String Reminder_isNotPresent = "Please First add Reminder to Note";
 }

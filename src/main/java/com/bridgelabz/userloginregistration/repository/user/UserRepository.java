@@ -6,8 +6,9 @@ import com.bridgelabz.userloginregistration.model.user.UserDataBase;
 
 /**
  * @author Tejashree Surve
- * Purpose : This is Repository which access the data from DataBase.
+ * Purpose : This is UserRepository which access the data from DataBase.
  */
 public interface UserRepository extends JpaRepository<UserDataBase, Integer> {
+	// find data by user email
 	UserDataBase findByEmail(String email);
 }

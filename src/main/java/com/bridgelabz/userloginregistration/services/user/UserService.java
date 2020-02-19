@@ -11,14 +11,18 @@ import com.bridgelabz.userloginregistration.response.Response;
  * Purpose : Interface of UserServices methods.
  */
 public interface UserService {
-	
+	// login
 	Response login(LoginUserDto loginUser);
 
+	// registration
 	Response registration(UserDto user);
 
+	// forget password
 	Response forgetPassword(EmailForgetPasswordDto email);
 
+	// reset password
 	Response resetPassword(String token, ResetPasswordDto passwordrest);
 	
+	// validate user
 	Response validateUser(String token);
 }

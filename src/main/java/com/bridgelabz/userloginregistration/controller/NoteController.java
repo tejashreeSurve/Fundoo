@@ -17,6 +17,10 @@ import com.bridgelabz.userloginregistration.dto.note.NoteDto;
 import com.bridgelabz.userloginregistration.response.Response;
 import com.bridgelabz.userloginregistration.services.note.NoteServiceImp;
 
+/**
+ * @author Tejashree Surve
+ * Purpose :  This is RestApi Controller for Notes Operation.
+ */
 @RestController
 public class NoteController {
 
@@ -48,6 +52,27 @@ public class NoteController {
 	@DeleteMapping("/notes/deletenote/{id}")
 	public ResponseEntity<Response> deleteNote(@RequestHeader String token, @PathVariable int id) {
 		Response response = noteservice.deleteNote(token, id);
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
+	}
+	
+	// archive or un-archive note by note id
+	@PutMapping("/notes/archiveOrUnarchive/{id}")
+	public ResponseEntity<Response> archiveOrUnarchive(@RequestHeader String token,@PathVariable int id) {
+		Response response = noteservice.archiveOrUnarchive(token, id);
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
+	}
+	
+	// pin or un-pin note by note id
+	@PutMapping("/notes/pinOrUnpin/{id}")
+	public ResponseEntity<Response> pinOrUnpin(@RequestHeader String token,@PathVariable int id) {
+		Response response = noteservice.pinOrUnpin(token, id);
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
+	}
+	
+	// trash or un-trash note by note id
+	@PutMapping("/notes/trashOrUntrash/{id}")
+	public ResponseEntity<Response> trashOrUntrash(@RequestHeader String token,@PathVariable int id) {
+		Response response = noteservice.trashOrUntrash(token, id);
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 }

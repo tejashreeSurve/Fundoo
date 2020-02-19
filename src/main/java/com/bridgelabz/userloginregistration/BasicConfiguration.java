@@ -5,7 +5,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.bridgelabz.userloginregistration.services.user.JwtToken;
+import com.bridgelabz.userloginregistration.utility.JwtToken;
 
 /**
  * @author Tejashree Surve

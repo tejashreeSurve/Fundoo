@@ -1,7 +1,6 @@
 package com.bridgelabz.userloginregistration.model.label;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -16,17 +15,23 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import com.bridgelabz.userloginregistration.model.note.NoteDataBase;
+
+
+/**
+ * @author Tejashree Surve
+ * Purpose : This is Entity Class for Label DataBase.
+ */
 @Component
 @Entity
 @Table(name = "labeldatabase")
 public class LabelDataBase {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String labelname;
 	@ManyToMany
-	@JoinTable(name ="notelabel",joinColumns = @JoinColumn(referencedColumnName = "id"))
-	private List<NoteDataBase> noteList = new  ArrayList<NoteDataBase>();
-	
+	@JoinTable(name = "notelabel", joinColumns = @JoinColumn(referencedColumnName = "id"))
+	private List<NoteDataBase> noteList = new ArrayList<NoteDataBase>();
 
 	public int getId() {
 		return id;

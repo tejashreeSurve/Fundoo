@@ -1,7 +1,10 @@
 package com.bridgelabz.userloginregistration.dto.note;
 
 import org.springframework.lang.NonNull;
-
+/**
+ * @author Tejashree Surve
+ * Purpose : This is Data Transfer Object class for Notes Api. 
+ */
 public class NoteDto {
 	@NonNull
 	private String title;

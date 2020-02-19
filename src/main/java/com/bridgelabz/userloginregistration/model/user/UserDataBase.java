@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * @author Tejashree Surve Purpose : This is Data Access Object class which is
+ * @author Tejashree Surve 
+ * Purpose : This is Data Access Object class which is
  *         connect to DataBase Layer.
  */
 @Component

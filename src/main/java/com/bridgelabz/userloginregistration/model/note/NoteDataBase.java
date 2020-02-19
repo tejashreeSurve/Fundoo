@@ -10,20 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import com.bridgelabz.userloginregistration.model.label.LabelDataBase;
+import com.bridgelabz.userloginregistration.model.reminder.ReminderDataBase;
 import com.bridgelabz.userloginregistration.model.user.UserDataBase;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * @author Tejashree Surve 
+ * Purpose : This is Entity Class for Note DataBase.
+ */
 @Entity
 @Component
 @Table(name = "notedatabase")
-@JsonIgnoreProperties({"userDataBase","labelList"})
+@JsonIgnoreProperties({ "userDataBase", "labelList" })
 public class NoteDataBase {
 
 	@Id
@@ -40,11 +45,13 @@ public class NoteDataBase {
 	@NonNull
 	private boolean trashOrUnTrash;
 	@ManyToOne
-	@JoinColumn(name = "user_id" ,nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private UserDataBase userDataBase;
 	@ManyToMany
 	private List<LabelDataBase> labelList = new ArrayList<LabelDataBase>();
 	
+	@OneToOne(mappedBy = "noteDataBase")
+	private ReminderDataBase reminderDataBase;
 	
 	public int getId() {
 		return id;
@@ -108,5 +115,13 @@ public class NoteDataBase {
 
 	public void setLabelList(List<LabelDataBase> labelList) {
 		this.labelList = labelList;
+	}
+
+	public ReminderDataBase getReminderDataBase() {
+		return reminderDataBase;
+	}
+
+	public void setReminderDataBase(ReminderDataBase reminderDataBase) {
+		this.reminderDataBase = reminderDataBase;
 	}
 }

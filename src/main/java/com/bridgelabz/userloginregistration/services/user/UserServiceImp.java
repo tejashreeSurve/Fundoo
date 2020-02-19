@@ -17,13 +17,17 @@ import com.bridgelabz.userloginregistration.dto.user.EmailForgetPasswordDto;
 import com.bridgelabz.userloginregistration.dto.user.LoginUserDto;
 import com.bridgelabz.userloginregistration.dto.user.ResetPasswordDto;
 import com.bridgelabz.userloginregistration.dto.user.UserDto;
+import com.bridgelabz.userloginregistration.message.MessageInfo;
+import com.bridgelabz.userloginregistration.message.MessageResponse;
 import com.bridgelabz.userloginregistration.model.user.UserDataBase;
 import com.bridgelabz.userloginregistration.repository.user.UserRepository;
 import com.bridgelabz.userloginregistration.response.Response;
+import com.bridgelabz.userloginregistration.utility.EmailSenderService;
+import com.bridgelabz.userloginregistration.utility.JwtToken;
 
 /**
- * @author Tejashree Surve Purpose : This Class contains Logic for ever RestApi
- *         methods.
+ * @author Tejashree Surve 
+ * Purpose : This Class contains Logic for User for all RestApi methods.
  */
 @Service
 @PropertySource("message.properties")

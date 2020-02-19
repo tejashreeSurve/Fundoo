@@ -1,4 +1,4 @@
-package com.bridgelabz.userloginregistration.services.user;
+package com.bridgelabz.userloginregistration.utility;
 
 import java.util.Date;
 import org.springframework.stereotype.Component;
